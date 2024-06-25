@@ -52,13 +52,13 @@ class ClientFactory
      * Attach file to request.
      * @throws \RuntimeException
      */
-    public function withFile(string $field, string $filepath): self
+    public function withFile(string $field, string $filepath, string $mimeType = ''): self
     {
         if (!file_exists($filepath)) {
             throw new \RuntimeException("File $filepath not exists");
         }
 
-        $this->files[$field] = '@' . $filepath;
+        $this->files[$field] = '@' . $filepath . (!empty($mimeType) ? ';' . $mimeType : '');
         return $this;
     }
 

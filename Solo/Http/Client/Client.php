@@ -94,7 +94,8 @@ class Client implements ClientInterface
         foreach ($encode as $key => $value) {
             if (!is_array($value)) {
                 if (str_starts_with($value, '@')) {
-                    $parsed[$key] = new \CURLFile(str_replace('@', '', $value));
+                    $parts = explode(';', str_replace('@', '', $value));
+                    $parsed[$key] = new \CURLFile($parts[0], $parts[1] ?? '');
                 } else {
                     $parsed[$key] = $value;
                 }
