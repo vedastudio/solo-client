@@ -16,7 +16,7 @@ class ClientFactory
     /** Set request headers */
     public function withHeaders(array $headers): self
     {
-        $this->headers = $headers;
+        $this->headers += $headers;
         return $this;
     }
 
