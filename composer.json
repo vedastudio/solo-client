@@ -1,0 +1,26 @@
+{
+  "name": "vedastudio/solo-client",
+  "type": "library",
+  "description": "Simple PSR-18 HTTP Client implementation",
+  "keywords": ["psr-18","php","http-client"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Vitaliy Olos",
+      "email": "vedastudio@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Solo\\": "Solo/"
+    }
+  },
+  "require": {
+    "php": "^8.2",
+    "psr/http-message": "^2.0",
+    "psr/http-client": "^1.0",
+    "nyholm/psr7": "^1.8"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
