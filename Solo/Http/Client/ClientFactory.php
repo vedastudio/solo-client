@@ -114,7 +114,7 @@ class ClientFactory
         foreach ($this->headers as $name => $value) {
             $request = $request->withHeader($name, $value);
         }
-        $client = new \Frame\Http\Client\Client($this->timeout, $this->sslCertificate);
+        $client = new Client($this->timeout, $this->sslCertificate);
         return $client->sendRequest($request);
     }
 
