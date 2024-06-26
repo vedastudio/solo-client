@@ -58,6 +58,8 @@ class ClientFactory
             throw new \RuntimeException("File $filepath not exists");
         }
 
+        if (empty($mimeType)) $mimeType = $this->detectFileMimeType($filepath);
+
         $this->files[$field] = '@' . $filepath . (!empty($mimeType) ? ';' . $mimeType : '');
         return $this;
     }
@@ -118,4 +120,14 @@ class ClientFactory
         return $client->sendRequest($request);
     }
 
+    /** Detect the MIME type of file*/
+    private function detectFileMimeType(string $filePath): string
+    {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $filePath);
+        finfo_close($finfo);
+
+        if ($mimeType !== false) return $mimeType;
+        return 'application/octet-stream';
+    }
 }

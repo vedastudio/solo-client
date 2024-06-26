@@ -21,7 +21,8 @@
     "psr/http-client": "^1.0",
     "nyholm/psr7": "^1.8",
     "vedastudio/solo-session": "dev-main",
-    "ext-curl": "*"
+    "ext-curl": "*",
+    "ext-fileinfo": "*"
   },
   "minimum-stability": "dev",
   "prefer-stable": true
