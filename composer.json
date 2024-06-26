@@ -20,7 +20,6 @@
     "psr/http-message": "^2.0",
     "psr/http-client": "^1.0",
     "nyholm/psr7": "^1.8",
-    "vedastudio/solo-session": "dev-main",
     "ext-curl": "*",
     "ext-fileinfo": "*"
   },
