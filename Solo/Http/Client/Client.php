@@ -11,8 +11,13 @@ use Psr\Http\Message\ResponseInterface;
 
 class Client implements ClientInterface
 {
-    public function __construct(private readonly int $timeout = 15, private readonly bool $sslCertificate = false)
+    private int $timeout;
+    private bool $sslCertificate;
+
+    public function __construct(int $timeout = 15, bool $sslCertificate = false)
     {
+        $this->timeout = $timeout;
+        $this->sslCertificate = $sslCertificate;
     }
 
     public function sendRequest(RequestInterface $request): ResponseInterface
@@ -77,7 +82,7 @@ class Client implements ClientInterface
     }
 
     /** Get parsed body from request */
-    private function getParsedBody(RequestInterface $request): array|string
+    private function getParsedBody(RequestInterface $request)
     {
         $body = (string)$request->getBody();
         if (empty($body)) {
@@ -85,7 +90,7 @@ class Client implements ClientInterface
         }
 
         $contentType = $request->getHeaderLine('Content-Type');
-        if ($contentType !== '' && str_contains($contentType, 'application/json')) {
+        if ($contentType !== '' && strpos($contentType, 'application/json') !== false) {
             return $body;
         }
 
@@ -93,7 +98,7 @@ class Client implements ClientInterface
         $parsed = [];
         foreach ($encode as $key => $value) {
             if (!is_array($value)) {
-                if (str_starts_with($value, '@')) {
+                if (strpos($value, '@') === 0) {
                     $parts = explode(';', str_replace('@', '', $value));
                     $parsed[$key] = new \CURLFile($parts[0], $parts[1] ?? '');
                 } else {
